@@ -55,27 +55,15 @@ class Vehicules(Base):
     mimimum_crew = Column(Integer)
     passengers= Column(Integer)
 
-class FavoritePlanets(Base):
-    __tablename__ = 'favorite_planets'
+class Favorites(Base):
+    __tablename__ = 'favorites'
     id = Column(Integer, primary_key=True, autoincrement=True)
     usuario_id = Column(Integer, ForeignKey('users.id'), nullable=False)
-    planeta_id = Column(Integer, ForeignKey('planets.id'), nullable=False)
-    fecha_guardado = Column(DateTime)
-
-class FavoriteCharacters(Base):
-    __tablename__ = 'favorite_characters'
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    usuario_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    planets_id = Column(Integer, ForeignKey('planets.id'), nullable=False)
     personaje_id = Column(Integer, ForeignKey('characters.id'), nullable=False)
+    vehicules_id = Column(Integer, ForeignKey('vehicules.id'), nullable=False)
     fecha_guardado = Column(DateTime)
 
-class FavoriteVehicules(Base):
-    __tablename__ = 'favorite_vehicules'
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    usuario_id = Column(Integer, ForeignKey('users.id'), nullable=False)
-    planeta_id = Column(Integer, ForeignKey('vehicules.id'), nullable=False)
-    fecha_guardado = Column(DateTime)
-    
 
     def to_dict(self):
         return {}
