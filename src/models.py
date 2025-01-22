@@ -7,23 +7,56 @@ from eralchemy2 import render_er
 
 Base = declarative_base()
 
-class Person(Base):
-    __tablename__ = 'person'
-    # Here we define columns for the table person
-    # Notice that each column is also a normal Python instance attribute.
+class Favoritos(Base):
+    __tablename__ = 'favoritos'
     id = Column(Integer, primary_key=True)
-    name = Column(String(250), nullable=False)
 
-class Address(Base):
-    __tablename__ = 'address'
-    # Here we define columns for the table address.
-    # Notice that each column is also a normal Python instance attribute.
+class Api(Base):
+    __tablename__ = 'api'
     id = Column(Integer, primary_key=True)
-    street_name = Column(String(250))
-    street_number = Column(String(250))
-    post_code = Column(String(250), nullable=False)
-    person_id = Column(Integer, ForeignKey('person.id'))
-    person = relationship(Person)
+    type = Column(String(250), nullable=False)
+
+class Personajes(Base):
+    __tablename__ = 'personajes'
+    id = Column(Integer, ForeignKey('favoritos.id'), primary_key=True)
+    personajes_id = Column(Integer, ForeignKey('api.id'))
+    birth_year = Column(String(250))
+    species = Column(String(250))
+    heigth = Column(String(250))
+    mass = Column(String(250))
+    gender = Column(String(250))
+    hair_color = Column(String(250))
+    skin_color = Column(String(250))
+    homeworld = Column(String(250))
+
+class Planetas(Base):
+    __tablename__ = 'planetas'
+    id = Column(Integer, ForeignKey('favoritos.id'), primary_key=True)
+    planetas_id = Column(Integer, ForeignKey('api.id'))
+    population = Column(Integer)
+    orbital_period = Column(Integer)
+    rotation_period = Column(Integer)
+    diameter = Column(Integer)
+    gravity = Column(Integer)
+    terrain = Column(String(250))
+    surface_water = Column(Integer)
+    climate = Column(String(250))
+
+class Vehiculos(Base):
+    __tablename__ = 'vehiculos'
+    id = Column(Integer, ForeignKey('favoritos.id'), primary_key=True)
+    vehiculos_id = Column(Integer, ForeignKey('api.id'))
+    model = Column(String(250))
+    manufacturer = Column(String(250))
+    clase = Column(String(250))
+    cost = Column(Integer)
+    speed = Column(Integer)
+    length = Column(Integer)
+    cargo_capacity = Column(Integer)
+    mimimum_crew = Column(Integer)
+    passengers = Column(Integer)
+
+    
 
     def to_dict(self):
         return {}
